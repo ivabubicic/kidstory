@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "kid-story-1ed89"
+  },
+  "targets": {
+    "kid-story-1ed89": {
+      "hosting": {
+        "kidstory-web": [
+          "kid-story-1ed89"
+        ]
+      }
+    }
+  }
+}

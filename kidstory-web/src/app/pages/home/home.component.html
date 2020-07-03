@@ -1,7 +1,7 @@
 <div class="image">
 <a routerLink="/login-component"><button class="backButton" nz-button nzType="link"><i nz-icon nzType="left"></i>Backward</button></a>
 <section class="card">
-  <div class="card-body">
+  <div class="card-body image">
     <!--    <div class="mainContent" *ngIf="featured">-->
     <!--      <h2 class="card-subtitle">{{featured.title}}</h2>-->
     <!--      <a [routerLink]="featured.type +'/' + featured.id" class="itemLink">-->
@@ -23,11 +23,11 @@
         <ul class="partitionContent">
           <li class="item" *ngFor="let element of content">
               <ng-template #lockTemplate>
-                <i (click)="contentClick()" class="ant-scroll-number-custom-component lock" nz-icon nzType="lock"></i>
+                <i (click)="contentClick(element.id)" class="ant-scroll-number-custom-component lock" nz-icon nzType="lock"></i>
               </ng-template>
-              <a (click)="contentClick()" class="itemLink">
-                <a routerLink="/story-component">
-                <img [alt]="element.title" [src]="element.thumb" class="itemThumb">
+              <a (click)="contentClick(element.id)" class="itemLink">
+                <a>
+                <img [alt]="element.title" [src]="element.url" class="itemThumb">
                 <div class="itemDescr">
                   <span class="itemAuthor">{{element.author}}</span>
                   <span class="itemName">{{element.title}}</span>

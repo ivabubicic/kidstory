@@ -14,7 +14,12 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { en_US, NZ_I18N, NzI18nModule } from 'ng-zorro-antd/i18n';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { PlyrModule } from 'ngx-plyr';
+import {PlyrModule} from 'ngx-plyr';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { RegisterComponent } from './pages/register/register.component';
+
+import {environment} from '../environments/environment';
+import {AngularFireModule} from "@angular/fire";
 
 @NgModule({
   declarations: [
@@ -22,6 +27,7 @@ import { PlyrModule } from 'ngx-plyr';
     LoginComponent,
     HomeComponent,
     StoryComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,11 +40,12 @@ import { PlyrModule } from 'ngx-plyr';
     BrowserAnimationsModule,
     NzCardModule,
     HttpClientModule,
-    PlyrModule,
     NoopAnimationsModule,
-    NzI18nModule, NzBadgeModule
+    NzI18nModule, NzBadgeModule, PlyrModule,
+    NzDividerModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [ { provide: NZ_I18N, useValue: en_US }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,5 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {PlyrComponent} from 'ngx-plyr';
+import * as Plyr from 'plyr';
+import {StoryService} from '../../services/story.service';
+import {pluck} from "rxjs/operators";
 
 @Component({
   selector: 'app-story',
@@ -8,20 +12,40 @@ import {ActivatedRoute} from '@angular/router';
 })
 
 export class StoryComponent implements OnInit {
-  story: any = {
-    title: 'Deep Relaxation',
-    likes: '2.2',
-    thumb: 'https://d1rdw86ji6lelz.cloudfront.net/image/in/Mind/Creativity/Creativity_Artistic-Clarity.jpg'
-  };
 
+  story: any;
+
+  /*story: any = {
+    title: 'Morning Yoga',
+    likes: '3.1',
+    url: 'https://d1rdw86ji6lelz.cloudfront.net/image/in/Mind/Focus/Focus_Acquiring-Knowledge.jpg'
+  };*/
+
+  // get the component instance to have access to plyr instance
+  @ViewChild(PlyrComponent, {static: true})
+
+  plyr: PlyrComponent;
+  // or get it from plyrInit event
   player: Plyr;
 
-  videoSources: Plyr.Source[] = [
+  audioSources: any;
+
+  /*audioSources: Array<any> = [
     {
-      src: 'bTqVqk7FSmY',
-      provider: 'youtube',
+      src: 'https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3',
+      type: 'audio/mp3',
     },
-  ];
+    {
+      src: 'https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.mp3',
+      type: 'audio/mp3',
+    }
+  ];*/
+
+  public id: string;
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private service: StoryService) {
+
+  }
 
   played(event: Plyr.PlyrEvent) {
     console.log('played', event);
@@ -31,15 +55,21 @@ export class StoryComponent implements OnInit {
     this.player.play(); // or this.plyr.player.play()
   }
 
-  constructor(private activatedRoute: ActivatedRoute) {
-
+  pause(): void {
+    this.player.pause(); // or this.plyr.player.play()
   }
 
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => this.getContent(params.id))
+  stop(): void {
+    this.player.stop(); // or this.plyr.player.stop()
   }
 
-  private getContent(id: string) {
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(params => this.getContent(params.id));
+    // this.id = this.activatedRoute.params.pipe(pluck('id')).toString();
   }
 
-}//end of class
+  private getContent(id) {
+    this.service.getById(id).subscribe(data => this.story = data);
+  }
+
+}

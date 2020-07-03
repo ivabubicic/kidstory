@@ -3,26 +3,9 @@
 }
 
 .background {
-  background-size:cover;
-  width: 100%;
-  height: 100%;
   background-image:url('https://data.whicdn.com/images/126359092/original.jpg');
-  background-position:50% 50%;
-}
-
-.container {
-  vertical-align: center;
-  max-width: 40px;
-  padding-left: 40%;
-  padding-right: 40%;
-}
-
-.player {
-  position: sticky;
-  opacity: .7;
-  display: block;
-  width: 18.5em;
-  height: 3em;
+  background-size:cover;
+  height: 100vh;
 }
 
 .title {
@@ -33,12 +16,31 @@
   margin: 2em;
 }
 
-.image {
-  display: block;
-  margin: auto;
-  height: 40em;
-}
-
 .mr-2 {
   margin-right: 0.5rem !important;
 }
+
+.container {
+  vertical-align: center;
+  width: 100%;
+}
+
+.player {
+  width: 640px;
+  position: sticky;
+  bottom: 0;
+  opacity: .7;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image {
+  display: block;
+  width: 640px;
+  height: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+

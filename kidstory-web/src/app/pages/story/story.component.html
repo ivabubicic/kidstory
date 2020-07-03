@@ -1,30 +1,43 @@
 <div class="background">
-<a routerLink="/home-component"><button class="backButton" nz-button nzType="link"><i nz-icon nzType="left"></i>Backward</button></a>
-<div *ngIf="story" class="row">
-  <h2 class="title mr-auto">{{story.title}}</h2>
-</div>
 
-<div *ngIf="story" class="container">
-  <img [alt]="story.title" [src]="story.thumb" class="image"/>
-  <nz-card class="player" zHoverable>
+  <a routerLink="/home-component">
+    <button class="backButton" nz-button nzType="link"><i nz-icon nzType="left"></i>Backward</button>
+  </a>
 
-    <nz-card-meta [nzAvatar]="coverTemplate" [nzDescription]="playerTemplate">
-    </nz-card-meta>
-    <ng-template #coverTemplate>
-    </ng-template>
+  <div *ngIf="story" class="row">
+    <h2 class="title mr-auto">{{story.title}}</h2>
+  </div>
 
-    <ng-template #playerTemplate>
-      <!--div
-        [plyrPlaysInline]="true"
-        [plyrSources]="story.url_audio"
-        plyr
-        plyrTitle="Video 1"
-        plyrType="audio">
-      </div-->
-      <div plyr style="width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="videoSources" (plyrInit)="player = $event" (plyrPlay)="played($event)"></div>
-      <button (click)="play()">Play</button>
+  <div *ngIf="story" class="container">
+    <img [alt]="story.title" [src]="story.url" class="image"/>
 
-    </ng-template>
-  </nz-card>
-</div>
+<!--    <nz-card style="width: 640px;">-->
+<!--      <nz-card-title nzTitle="Audio"></nz-card-title>-->
+
+<!--      <ng-template #coverTemplate>-->
+<!--        <div plyr plyrTitle="Audio" plyrType="audio" [plyrPlaysInline]="true" [plyrCrossOrigin]="true"-->
+<!--             [plyrSources]="audioSources"></div>-->
+<!--      </ng-template>-->
+<!--    </nz-card>-->
+<!--    <nz-divider nzType="vertical"></nz-divider>-->
+
+    <nz-card class="player" zHoverable >
+      <nz-card-meta [nzAvatar]="coverTemplate" [nzDescription]="playerTemplate">
+      </nz-card-meta>
+      <ng-template #coverTemplate>
+
+      </ng-template>
+      <ng-template #playerTemplate>
+        <div
+          [plyrPlaysInline]="true"
+          [plyrSources]="story.src"
+          plyr
+          plyrType="audio"
+         >
+        </div>
+      </ng-template>
+    </nz-card>
+
+  </div>
+
 </div>

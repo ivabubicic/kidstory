@@ -1,0 +1,77 @@
+<div class="image">
+  <a routerLink="/login-component">
+    <button class="backButton" nz-button nzType="link"><i nz-icon nzType="left"></i>Backward</button>
+  </a>
+
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="register-form">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="firstName">First Name</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback nzErrorTip="Please input your first name">
+        <input type="text" nz-input formControlName="firstName" placeholder="John"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="lastName">Last Name</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback nzErrorTip="Please input your last name">
+        <input type="text" nz-input formControlName="lastName" placeholder="Doe"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Username</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+        <input nz-input formControlName="username" placeholder="johndoe"/>
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Minimal length is 5 characters
+          </ng-container>
+          <ng-container *ngIf="control.hasError('duplicated')">
+            This username is redundant
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback nzErrorTip="The input is not a valid e-mail address">
+        <input nz-input type="email" formControlName="email" id="email" placeholder="johndoe@email.com"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="password">Password</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback nzErrorTip="Minimal length is 8 characters">
+        <input
+          nz-input
+          type="password"
+          id="password"
+          formControlName="password"
+          (ngModelChange)="updateConfirmValidator()"
+          placeholder="H5fVr9pS"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="checkPassword">Confirm Password</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="errorTpl">
+        <input nz-input type="password" formControlName="checkPassword" id="checkPassword"
+               placeholder="H5fVr9pS"/>
+        <ng-template #errorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Write the same password as the one above
+          </ng-container>
+          <ng-container *ngIf="control.hasError('confirm')">
+            Two passwords that you entered are inconsistent
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control>
+        <button nz-button nzType="primary">Register</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
