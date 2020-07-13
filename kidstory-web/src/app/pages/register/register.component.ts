@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {Router} from '@angular/router';
+import validate = WebAssembly.validate;
 
 @Component({
   selector: 'app-register',
@@ -11,19 +14,21 @@ export class RegisterComponent implements OnInit {
 
   validateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  public email = '';
+  public password = '';
+  public checkPassword = '';
+
+  constructor(private fb: FormBuilder, private firebaseAuth: AngularFireAuth, private router: Router) {
+
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
 
-    const { required, maxLength, minLength } = Validators;
+    const {maxLength, minLength} = Validators;
 
     this.validateForm = this.fb.group({
-      firstName: ['', [Validators.required, maxLength(20), minLength(2)]],
-      lastName: ['', [Validators.required, maxLength(20), minLength(2)]],
-      username: ['', [Validators.required, minLength(5)]],
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required, minLength(8)]],
+      email: [this.email, [Validators.email, Validators.required]],
+      password: [this.password, [Validators.required, minLength(8)]],
       checkPassword: ['', [Validators.required, minLength(8)]],
     });
   }
@@ -32,9 +37,15 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
+    this.firebaseAuth.createUserWithEmailAndPassword(this.email, this.password).then(result =>
+      console.log('User registered successfully'));
+    this.validateForm.reset();
+    if (this.email === '') {
+      console.log('email empty - register');
+    } else if (this.password === '') {
+      console.log('password empty - register');
     }
+    alert('You registered successfully!');
+    this.router.navigateByUrl('login-component');
   }
 }

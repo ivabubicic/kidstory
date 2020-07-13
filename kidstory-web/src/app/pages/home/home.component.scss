@@ -5,8 +5,9 @@
 .image {
   background-image: url('https://data.whicdn.com/images/126359092/original.jpg');
   background-size: cover;
+  background-position: 50% 50%;
+  min-height: 100%;
   width: 100%;
-  height: 100vh;
 }
 
 .feed {

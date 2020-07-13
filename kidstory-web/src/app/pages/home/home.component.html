@@ -1,47 +1,35 @@
 <div class="image">
-<a routerLink="/login-component"><button class="backButton" nz-button nzType="link"><i nz-icon nzType="left"></i>Backward</button></a>
-<section class="card">
-  <div class="card-body image">
-    <!--    <div class="mainContent" *ngIf="featured">-->
-    <!--      <h2 class="card-subtitle">{{featured.title}}</h2>-->
-    <!--      <a [routerLink]="featured.type +'/' + featured.id" class="itemLink">-->
-    <!--        <div class="player">-->
-    <!--          <img [src]="featured.url_thumb">-->
-    <!--        </div>-->
-    <!--&lt;!&ndash;        <div class="descr">&ndash;&gt;-->
-    <!--&lt;!&ndash;          <div class="block">&ndash;&gt;-->
-    <!--&lt;!&ndash;            <div class="mb-2">&ndash;&gt;-->
-    <!--&lt;!&ndash;            </div>&ndash;&gt;-->
-    <!--&lt;!&ndash;            <p class="mb-0">{{featured.title}}</p>&ndash;&gt;-->
-    <!--&lt;!&ndash;          </div>&ndash;&gt;-->
-    <!--&lt;!&ndash;        </div>&ndash;&gt;-->
-    <!--      </a>-->
-    <!--    </div>-->
-    <div *ngIf="content && content.length > 0" class="feed">
-      <div class="partition" *ngIf="content.length > 0">
-        <h2 class="title">Songs</h2>
-        <ul class="partitionContent">
-          <li class="item" *ngFor="let element of content">
+  <a routerLink="/login-component">
+    <button class="backButton" nz-button nzType="link"><i nz-icon nzType="left"></i>Backward</button>
+  </a>
+  <section class="card">
+    <div class="card-body">
+      <div *ngIf="content && content.length > 0" class="feed">
+        <div class="partition" *ngIf="content.length > 0">
+          <h2 class="title">Songs</h2>
+          <ul class="partitionContent">
+            <li class="item" *ngFor="let element of content">
               <ng-template #lockTemplate>
-                <i (click)="contentClick(element.id)" class="ant-scroll-number-custom-component lock" nz-icon nzType="lock"></i>
+                <i (click)="contentClick(element.id)" class="ant-scroll-number-custom-component lock" nz-icon
+                   nzType="lock"></i>
               </ng-template>
               <a (click)="contentClick(element.id)" class="itemLink">
                 <a>
-                <img [alt]="element.title" [src]="element.url" class="itemThumb">
-                <div class="itemDescr">
-                  <span class="itemAuthor">{{element.author}}</span>
-                  <span class="itemName">{{element.title}}</span>
-                  <span class="text-muted itemDescr">{{element.duration}} <span
-                    *ngIf="element.likes"> &#183; {{element.likes}}
-                    likes</span></span>
-                </div>
+                  <img [alt]="element.title" [src]="element.url" class="itemThumb">
+                  <div class="itemDescr">
+                    <span class="itemAuthor">{{element.author}}</span>
+                    <span class="itemName">{{element.title}}</span>
+                    <span class="text-muted itemDescr">{{element.duration}} <span
+                      *ngIf="element.likes"> &#183; {{element.likes}}
+                      likes</span></span>
+                  </div>
+                </a>
               </a>
-              </a>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 </div>
 <router-outlet></router-outlet>

@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {StoryService} from '../../services/story.service';
-import {id_ID} from 'ng-zorro-antd';
-import {element} from "protractor";
 
 @Component({
   selector: 'app-home',
@@ -132,7 +130,6 @@ export class HomeComponent implements OnInit {
   }
 
   contentClick(elementId: string): void {
-    // this.router.navigate(['story-component']);
     this.router.navigate([`story-component/${elementId}`]);
   }
 
